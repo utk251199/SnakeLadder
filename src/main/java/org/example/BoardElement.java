@@ -1,9 +1,15 @@
 package org.example;
 
-public class SnakeOrLadder {
+public abstract class BoardElement {
 
     private int start;
     private int end;
+
+
+    public BoardElement(int start, int end) {  // Constructor!
+        this.start = start;
+        this.end = end;
+    }
 
     public int getStart() {
         return start;
@@ -20,4 +26,6 @@ public class SnakeOrLadder {
     public void setEnd(int end) {
         this.end = end;
     }
+
+    public abstract int updatePosition(int position);
 }

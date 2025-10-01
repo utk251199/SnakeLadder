@@ -33,14 +33,12 @@ public class Board {
             int ladderEnd = rand.nextInt(size*size - ladderStart) + ladderStart + 1;
             int rowNumber = ladderStart/size;
             int colNumber = ladderStart%size;
-            if(cells[rowNumber][colNumber].getSnakeOrLadder() != null){
+            if(cells[rowNumber][colNumber].getBoardElement() != null){
                 continue;
             }
 
-            SnakeOrLadder ladder = new SnakeOrLadder();
-            ladder.setStart(ladderStart);
-            ladder.setEnd(ladderEnd);
-            cells[rowNumber][colNumber].setSnakeOrLadder(ladder);
+            BoardElement ladder = new Ladder(ladderStart,ladderEnd);
+            cells[rowNumber][colNumber].setBoardElement(ladder);
             ladderCount--;
         }
 
@@ -49,14 +47,12 @@ public class Board {
             int snakeEnd = rand.nextInt(snakeStart -1 ) + 1;
             int rowNumber = snakeStart/size;
             int colNumber = snakeStart%size;
-            if(cells[rowNumber][colNumber].getSnakeOrLadder() != null){
+            if(cells[rowNumber][colNumber].getBoardElement() != null){
                 continue;
             }
 
-            SnakeOrLadder snake = new SnakeOrLadder();
-            snake.setStart(snakeStart);
-            snake.setEnd(snakeEnd);
-            cells[rowNumber][colNumber].setSnakeOrLadder(snake);
+            BoardElement snake = new Snake(snakeStart,snakeEnd);
+            cells[rowNumber][colNumber].setBoardElement(snake);
             snakesCount--;
         }
     }

@@ -2,11 +2,13 @@ package org.example;
 
 import java.util.Random;
 
-public class Dice {
+public class StandardDice implements DiceStrategy{
 
-    private int diceCount;
+    private final int diceCount;
 
-    public Dice(int diceCount){
+    Random random = new Random();
+
+    public StandardDice(int diceCount){
         this.diceCount = diceCount;
     }
 
@@ -15,7 +17,7 @@ public class Dice {
         int total = 0;
 
         for(int i=0;i<diceCount;i++){
-            total+= new Random().nextInt(6) + 1;
+            total+= random.nextInt(6) + 1;
         }
         return total;
     }

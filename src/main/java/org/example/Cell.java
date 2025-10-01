@@ -2,13 +2,13 @@ package org.example;
 
 public class Cell {
 
-    private SnakeOrLadder snakeOrLadder;
+    private BoardElement boardElement;
 
-    public SnakeOrLadder getSnakeOrLadder() {
-        return snakeOrLadder;
+    public BoardElement getBoardElement() {
+        return boardElement;
     }
 
-    public void setSnakeOrLadder(SnakeOrLadder snakeOrLadder) {
-        this.snakeOrLadder = snakeOrLadder;
+    public void setBoardElement(BoardElement boardElement) {
+        this.boardElement = boardElement;
     }
 }

@@ -7,7 +7,7 @@ public class Game {
 
     Board board;
     Deque<Player> players;
-    Dice dice;
+    DiceStrategy dice;
 
     public void setGame() {
         board = new Board(10, 5, 5);
@@ -16,7 +16,7 @@ public class Game {
         players = new ArrayDeque<>();
         players.add(p1);
         players.add(p2);
-        dice = new Dice(1);
+        dice = new StandardDice(1);
     }
 
     public void playGame() {
@@ -32,7 +32,7 @@ public class Game {
                 return;
             }
 
-            int updatedPosition = checkForSnakesOrLadders(newPosition);
+            int updatedPosition = checkForBoardElement(newPosition);
             currentPlayer.setCurrentPosition(updatedPosition);
             System.out.printf("After Dice roll,Player %s is at position %s\n", currentPlayer.getPlayerNumber(), currentPlayer.getCurrentPosition());
             players.addLast(currentPlayer);
@@ -40,17 +40,16 @@ public class Game {
         }
     }
 
-    public int checkForSnakesOrLadders(int newPosition) {
+    public int checkForBoardElement(int newPosition) {
 
         int rowNumber = newPosition / board.getSize();
         int colNumber = newPosition % board.getSize();
 
-        if (board.getCells()[rowNumber][colNumber].getSnakeOrLadder() == null)
+        BoardElement boardElement = board.getCells()[rowNumber][colNumber].getBoardElement();
+
+        if (boardElement== null)
             return newPosition;
 
-        int updatedPosition = board.getCells()[rowNumber][colNumber].getSnakeOrLadder().getEnd();
-        System.out.printf("Moving from %s to %s\n", newPosition, updatedPosition);
-
-        return updatedPosition;
+        return boardElement.updatePosition(newPosition);
     }
 }
