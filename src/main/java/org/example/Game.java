@@ -1,0 +1,56 @@
+package org.example;
+
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+public class Game {
+
+    Board board;
+    Deque<Player> players;
+    Dice dice;
+
+    public void setGame() {
+        board = new Board(10, 5, 5);
+        Player p1 = new Player(1);
+        Player p2 = new Player(2);
+        players = new ArrayDeque<>();
+        players.add(p1);
+        players.add(p2);
+        dice = new Dice(1);
+    }
+
+    public void playGame() {
+
+        while (true) {
+            Player currentPlayer = players.removeFirst();
+            System.out.printf("\nPlayer %s is at position %s\n", currentPlayer.getPlayerNumber(), currentPlayer.getCurrentPosition());
+            int diceNumber = dice.rollDice();
+            int newPosition = currentPlayer.getCurrentPosition() + diceNumber;
+
+            if (newPosition > board.getSize() * board.getSize()) {
+                System.out.printf("Player %s is the Winner", currentPlayer.getPlayerNumber());
+                return;
+            }
+
+            int updatedPosition = checkForSnakesOrLadders(newPosition);
+            currentPlayer.setCurrentPosition(updatedPosition);
+            System.out.printf("After Dice roll,Player %s is at position %s\n", currentPlayer.getPlayerNumber(), currentPlayer.getCurrentPosition());
+            players.addLast(currentPlayer);
+
+        }
+    }
+
+    public int checkForSnakesOrLadders(int newPosition) {
+
+        int rowNumber = newPosition / board.getSize();
+        int colNumber = newPosition % board.getSize();
+
+        if (board.getCells()[rowNumber][colNumber].getSnakeOrLadder() == null)
+            return newPosition;
+
+        int updatedPosition = board.getCells()[rowNumber][colNumber].getSnakeOrLadder().getEnd();
+        System.out.printf("Moving from %s to %s\n", newPosition, updatedPosition);
+
+        return updatedPosition;
+    }
+}
