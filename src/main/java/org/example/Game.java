@@ -1,6 +1,5 @@
 package org.example;
 
-import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Game {
@@ -9,14 +8,10 @@ public class Game {
     Deque<Player> players;
     DiceStrategy dice;
 
-    public void setGame() {
-        board = new Board(10, 5, 5);
-        Player p1 = new Player(1);
-        Player p2 = new Player(2);
-        players = new ArrayDeque<>();
-        players.add(p1);
-        players.add(p2);
-        dice = new StandardDice(1);
+    public Game(Board board, Deque<Player> players, DiceStrategy dice){
+        this.board = board;
+        this.players = players;
+        this.dice = dice;
     }
 
     public void playGame() {
