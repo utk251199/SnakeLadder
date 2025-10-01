@@ -62,10 +62,6 @@ public class Board {
         return size;
     }
 
-    public Cell[][] getCells() {
-        return cells;
-    }
-
     public int getLadderCount() {
         return ladderCount;
     }
@@ -88,5 +84,11 @@ public class Board {
 
     public void setSnakesCount(int snakesCount) {
         this.snakesCount = snakesCount;
+    }
+
+    Cell getCell(int position) {
+        int rowNumber = position / size;
+        int colNumber = position % size;
+        return cells[rowNumber][colNumber];
     }
 }

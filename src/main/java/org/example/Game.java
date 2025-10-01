@@ -37,10 +37,7 @@ public class Game {
 
     public int checkForBoardElement(int newPosition) {
 
-        int rowNumber = newPosition / board.getSize();
-        int colNumber = newPosition % board.getSize();
-
-        BoardElement boardElement = board.getCells()[rowNumber][colNumber].getBoardElement();
+        BoardElement boardElement = board.getCell(newPosition).getBoardElement();
 
         if (boardElement== null)
             return newPosition;
